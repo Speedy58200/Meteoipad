@@ -1,98 +1,64 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MétéoiPad</title>
 
-body{
-    background:linear-gradient(180deg,#2b5ea8,#0b1b33);
-    color:white;
-    min-height:100vh;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.app{
-    max-width:1200px;
-    margin:auto;
-    padding:30px;
-}
+<div class="dashboard">
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:30px;
-}
+    <header>
+        <div>
+            <div id="time">00:00</div>
+            <div id="date">Chargement...</div>
+        </div>
 
-#time{
-    font-size:80px;
-    font-weight:bold;
-}
+        <div class="currentWeather">
+            <img id="icon" alt="Météo">
+            <div>
+                <h1 id="temp">--°</h1>
+                <p id="description">Chargement...</p>
+            </div>
+        </div>
+    </header>
 
-#date{
-    font-size:24px;
-    opacity:.8;
-}
+    <section class="cards">
 
-.current{
-    text-align:center;
-}
+        <div class="card">
+            <h3>💨 Vent</h3>
+            <span id="wind">-- km/h</span>
+        </div>
 
-#icon{
-    width:120px;
-    height:120px;
-}
+        <div class="card">
+            <h3>💧 Humidité</h3>
+            <span id="humidity">--%</span>
+        </div>
 
-#temp{
-    font-size:70px;
-}
+        <div class="card">
+            <h3>🌡️ Pression</h3>
+            <span id="pressure">----</span>
+        </div>
 
-#city{
-    font-size:32px;
-}
+        <div class="card">
+            <h3>🥵 Ressenti</h3>
+            <span id="feels">--°</span>
+        </div>
 
-.infos{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    margin-bottom:30px;
-}
+    </section>
 
-.card{
-    background:rgba(255,255,255,.15);
-    border-radius:20px;
-    padding:20px;
-    text-align:center;
-    backdrop-filter:blur(10px);
-}
+    <section>
+        <h2>Prévisions</h2>
+        <div id="forecast"></div>
+    </section>
 
-.card span{
-    display:block;
-    margin-bottom:10px;
-    font-size:18px;
-}
+</div>
 
-.card strong{
-    font-size:30px;
-}
+<script src="config.js"></script>
+<script src="script.js"></script>
 
-.scroll{
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    padding:10px 0;
-}
-
-.hourCard,
-.dayCard{
-    min-width:100px;
-    background:rgba(255,255,255,.12);
-    border-radius:18px;
-    padding:15px;
-    text-align:center;
-}
-
-.hourCard img,
-.dayCard img{
-    width:50px;
-}
+</body>
+</html>
