@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MétéoiPad</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header>
+
+        <div class="clock">
+            <div id="time">00:00</div>
+            <div id="date">Chargement...</div>
+        </div>
+
+        <div class="current">
+
+            <img id="icon" alt="Météo">
+
+            <h1 id="temp">--°</h1>
+
+            <h2 id="city">Ma Ville</h2>
+
+            <p id="description">Chargement...</p>
+
+        </div>
+
+    </header>
+
+    <section class="infos">
+
+        <div class="card">
+            <span>💨 Vent</span>
+            <strong id="wind">-- km/h</strong>
+        </div>
+
+        <div class="card">
+            <span>💧 Humidité</span>
+            <strong id="humidity">-- %</strong>
+        </div>
+
+        <div class="card">
+            <span>🌡️ Pression</span>
+            <strong id="pressure">----</strong>
+        </div>
+
+        <div class="card">
+            <span>🌡️ Ressenti</span>
+            <strong id="feels">--°</strong>
+        </div>
+
+    </section>
+
+    <section>
+
+        <h2>Prévisions 24 heures</h2>
+
+        <div id="hourly" class="scroll"></div>
+
+    </section>
+
+    <section>
+
+        <h2>Prévisions 7 jours</h2>
+
+        <div id="daily" class="scroll"></div>
+
+    </section>
+
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
