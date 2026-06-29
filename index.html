@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MétéoiPad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MétéoiPad</title>
 
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -19,59 +20,77 @@
             <div id="date">Chargement...</div>
         </div>
 
-        <div class="weather-now">
-
-            <img id="icon" src="" alt="Météo">
-
-            <div class="weather-info">
-    <div id="temp">--°</div>
-    <div id="city">Cosne-sur-Loire</div>
-    <div id="description">Chargement...</div>
-</div>
-
+        <div class="city" id="city">
+            Cosne-sur-Loire
         </div>
 
     </header>
 
-    <section class="infos">
 
-        <div class="card">
-            <h3>💨 Vent</h3>
-            <span id="wind">-- km/h</span>
+    <main>
+
+        <div class="weather-main">
+
+            <img id="icon"
+                 src=""
+                 alt="Météo">
+
+            <div id="temp">--°</div>
+
+            <div id="description">
+                Chargement...
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>💧 Humidité</h3>
-            <span id="humidity">-- %</span>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>💨 Vent</h3>
+                <p id="wind">-- km/h</p>
+            </div>
+
+            <div class="card">
+                <h3>💧 Humidité</h3>
+                <p id="humidity">-- %</p>
+            </div>
+
+            <div class="card">
+                <h3>🌡️ Pression</h3>
+                <p id="pressure">---- hPa</p>
+            </div>
+
+            <div class="card">
+                <h3>😊 Ressenti</h3>
+                <p id="feels">--°</p>
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>🌡 Pression</h3>
-            <span id="pressure">----</span>
-        </div>
 
-        <div class="card">
-            <h3>🥵 Ressenti</h3>
-            <span id="feels">--°</span>
-        </div>
+        <section class="forecast24">
 
-    </section>
+            <h2>Prévisions 24 heures</h2>
 
-    <section>
+            <div id="hourlyForecast">
 
-        <h2>Prévisions 24 heures</h2>
+            </div>
 
-        <div id="hourly" class="forecast-row"></div>
+        </section>
 
-    </section>
 
-    <section>
+        <section class="forecast7">
 
-        <h2>Prévisions 7 jours</h2>
+            <h2>Prévisions 7 jours</h2>
 
-        <div id="daily" class="forecast-row"></div>
+            <div id="dailyForecast">
 
-    </section>
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
