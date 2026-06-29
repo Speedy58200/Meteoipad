@@ -1,21 +1,20 @@
-// ===== MétéoiPad V1 =====
-
-const time = document.getElementById("time");
-const date = document.getElementById("date");
+// ===== MétéoiPad V2 =====
 
 function updateClock() {
     const now = new Date();
 
-    time.textContent = now.toLocaleTimeString("fr-FR", {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    document.getElementById("time").textContent =
+        now.toLocaleTimeString("fr-FR", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
 
-    date.textContent = now.toLocaleDateString("fr-FR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    });
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("fr-FR", {
+            weekday: "long",
+            day: "numeric",
+            month: "long"
+        });
 }
 
 updateClock();
@@ -24,35 +23,54 @@ setInterval(updateClock, 1000);
 async function loadWeather() {
 
     const url =
-`https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&units=${CONFIG.units}&lang=${CONFIG.lang}&appid=${CONFIG.apiKey}`;
+`https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&appid=${CONFIG.apiKey}&units=metric&lang=fr`;
 
-    const response = await fetch(url);
-    const weather = await response.json();
+    try {
 
-    document.getElementById("city").textContent = CONFIG.ville;
+        const response = await fetch(url);
 
-    document.getElementById("temp").textContent =
-        Math.round(weather.main.temp) + "°";
+        const data = await response.json();
 
-    document.getElementById("description").textContent =
-        weather.weather[0].description;
+        if (data.cod && data.cod != 200) {
+            alert("Erreur OpenWeather : " + data.message);
+            return;
+        }
 
-    document.getElementById("wind").textContent =
-        Math.round(weather.wind.speed * 3.6) + " km/h";
+        document.getElementById("city").textContent = CONFIG.ville;
 
-    document.getElementById("humidity").textContent =
-        weather.main.humidity + " %";
+        document.getElementById("temp").textContent =
+            Math.round(data.main.temp) + "°";
 
-    document.getElementById("pressure").textContent =
-        weather.main.pressure + " hPa";
+        document.getElementById("description").textContent =
+            data.weather[0].description;
 
-    document.getElementById("feels").textContent =
-        Math.round(weather.main.feels_like) + "°";
+        document.getElementById("wind").textContent =
+            Math.round(data.wind.speed * 3.6) + " km/h";
 
-    document.getElementById("icon").src =
-        `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
+        document.getElementById("humidity").textContent =
+            data.main.humidity + " %";
+
+        document.getElementById("pressure").textContent =
+            data.main.pressure + " hPa";
+
+        document.getElementById("feels").textContent =
+            Math.round(data.main.feels_like) + "°";
+
+        document.getElementById("icon").src =
+            "https://openweathermap.org/img/wn/" +
+            data.weather[0].icon +
+            "@4x.png";
+
+    } catch (e) {
+
+        console.log(e);
+
+        alert("Impossible de contacter OpenWeather");
+
+    }
 
 }
 
 loadWeather();
+
 setInterval(loadWeather, 600000);
