@@ -23,21 +23,29 @@ setInterval(updateClock, 1000);
 
 async function loadWeather() {
 
-    const url =
+    alert("1");
 
+    const url =
 `https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&appid=${CONFIG.apiKey}&units=metric&lang=fr`;
+
+    alert("2");
 
     try {
 
+        alert("3");
+
         const response = await fetch(url);
 
-alert("Status : " + response.status);
+        alert("4");
 
-const data = await response.json();
-
-alert(JSON.stringify(data));
+        const data = await response.json();
 
         alert(JSON.stringify(data));
+
+    } catch (e) {
+
+        alert(e.message);
+
 
         if (data.cod && data.cod != 200) {
             alert("Erreur OpenWeather : " + data.message);
