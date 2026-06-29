@@ -1,4 +1,7 @@
-// ===== MétéoiPad V2 =====
+// ===============================
+// MétéoiPad V3
+// Partie 1
+// ===============================
 
 function updateClock() {
     const now = new Date();
@@ -22,35 +25,128 @@ setInterval(updateClock, 1000);
 
 async function loadWeather() {
 
-    const url =
-        `https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&appid=${CONFIG.apiKey}&units=${CONFIG.units}&lang=${CONFIG.lang}`;
-
     try {
 
-        const response = await fetch(url);
+        // météo actuelle
+        const weatherURL =
+            `https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&units=${CONFIG.units}&lang=${CONFIG.lang}&appid=${CONFIG.apiKey}`;
 
-        if (!response.ok) {
-            throw new Error("Erreur HTTP " + response.status);
+        // prévisions
+        const forecastURL =
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${CONFIG.lat}&lon=${CONFIG.lon}&units=${CONFIG.units}&lang=${CONFIG.lang}&appid=${CONFIG.apiKey}`;
+
+        const weatherResponse = await fetch(weatherURL);
+        const weather = await weatherResponse.json();
+
+        const forecastResponse = await fetch(forecastURL);
+        const forecast = await forecastResponse.json();
+
+        if (weather.cod != 200) {
+            throw new Error(weather.message);
         }
 
-        const data = await response.json();
-
         document.getElementById("city").textContent = CONFIG.ville;
-        document.getElementById("temp").textContent = Math.round(data.main.temp) + "°";
-        document.getElementById("description").textContent = data.weather[0].description;
-        document.getElementById("wind").textContent = Math.round(data.wind.speed * 3.6) + " km/h";
-        document.getElementById("humidity").textContent = data.main.humidity + " %";
-        document.getElementById("pressure").textContent = data.main.pressure + " hPa";
-        document.getElementById("feels").textContent = Math.round(data.main.feels_like) + "°";
+
+        document.getElementById("temp").textContent =
+            Math.round(weather.main.temp) + "°";
+
+        document.getElementById("description").textContent =
+            weather.weather[0].description;
+
+        document.getElementById("wind").textContent =
+            Math.round(weather.wind.speed * 3.6) + " km/h";
+
+        document.getElementById("humidity").textContent =
+            weather.main.humidity + " %";
+
+        document.getElementById("pressure").textContent =
+            weather.main.pressure + " hPa";
+
+        document.getElementById("feels").textContent =
+            Math.round(weather.main.feels_like) + "°";
 
         document.getElementById("icon").src =
-            `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
+            `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
 
-    } catch (e) {
-        alert(e.message);
-        console.error(e);
+                // ==========================
+        // Prévisions 24 heures
+        // ==========================
+
+        const hourly = document.getElementById("hourlyForecast");
+        hourly.innerHTML = "";
+
+        forecast.list.slice(0, 8).forEach(item => {
+
+            const heure = new Date(item.dt * 1000)
+                .toLocaleTimeString("fr-FR", {
+                    hour: "2-digit"
+                });
+
+            hourly.innerHTML += `
+                <div class="hour">
+                    <div>${heure}h</div>
+                    <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
+                    <div>${Math.round(item.main.temp)}°</div>
+                </div>
+            `;
+        });
+
+        // ==========================
+        // Prévisions 7 jours
+        // ==========================
+
+        const daily = document.getElementById("dailyForecast");
+        daily.innerHTML = "";
+
+        const jours = {};
+
+        forecast.list.forEach(item => {
+
+            const date = item.dt_txt.split(" ")[0];
+
+            if (!jours[date]) {
+                jours[date] = item;
+            }
+
+        });
+
+        Object.values(jours)
+            .slice(0, 7)
+            .forEach(item => {
+
+                const jour =
+                    new Date(item.dt * 1000)
+                    .toLocaleDateString("fr-FR", {
+                        weekday: "long"
+                    });
+
+                daily.innerHTML += `
+                    <div class="day">
+                        <span>${jour}</span>
+
+                        <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
+
+                        <span>${Math.round(item.main.temp_min)}° / ${Math.round(item.main.temp_max)}°</span>
+                    </div>
+                `;
+            });
+
+            } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("description").textContent =
+            "Impossible de charger la météo";
+
     }
+
 }
 
+// ===============================
+// Démarrage
+// ===============================
+
 loadWeather();
+
+// Actualisation toutes les 10 minutes
 setInterval(loadWeather, 600000);
