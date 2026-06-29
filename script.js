@@ -30,7 +30,12 @@ async function loadWeather() {
     try {
 
         const response = await fetch(url);
-        const data = await response.json();
+
+alert("Status : " + response.status);
+
+const data = await response.json();
+
+alert(JSON.stringify(data));
 
         alert(JSON.stringify(data));
 
