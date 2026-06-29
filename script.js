@@ -1,6 +1,10 @@
-alert("SCRIPT V2 chargé");
-// ===== MétéoiPad V2 =====
 
+// ===== MétéoiPad V2 =====
+alert("SCRIPT V2 chargé");
+
+window.onerror = function (msg, url, line, col) {
+    alert("ERREUR : " + msg + "\nLigne : " + line);
+};
 function updateClock() {
     const now = new Date();
 
