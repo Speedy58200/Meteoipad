@@ -30,6 +30,7 @@ async function loadWeather() {
         const response = await fetch(url);
 
         const data = await response.json();
+alert(JSON.stringify(data));
 
         if (data.cod && data.cod != 200) {
             alert("Erreur OpenWeather : " + data.message);
