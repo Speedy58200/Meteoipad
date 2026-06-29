@@ -25,26 +25,6 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-async function loadWeather() {
-
-    alert("1");
-
-    const url =
-`https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&appid=${CONFIG.apiKey}&units=metric&lang=fr`;
-
-    alert("2");
-
-    try {
-
-        alert("3");
-
-        const response = await fetch(url);
-
-        alert("4");
-
-        const data = await response.json();
-
-        alert(JSON.stringify(data));
 
     async function loadWeather() {
 
