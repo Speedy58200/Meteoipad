@@ -1,3 +1,4 @@
+alert("SCRIPT V2 chargé");
 // ===== MétéoiPad V2 =====
 
 function updateClock() {
