@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MétéoiPad</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MétéoiPad</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
-<div class="dashboard">
+<div class="container">
 
     <header>
-        <div>
+
+        <div class="clock">
             <div id="time">00:00</div>
             <div id="date">Chargement...</div>
         </div>
 
-        <div class="currentWeather">
-            <img id="icon" alt="Météo">
-            <div>
-                <h1 id="temp">--°</h1>
-                <p id="description">Chargement...</p>
+        <div class="weather-now">
+
+            <img id="icon" src="" alt="Météo">
+
+            <div class="temp">
+                <div id="temp">--°</div>
+                <div id="city">Cosne-sur-Loire</div>
+                <div id="description">Chargement...</div>
             </div>
+
         </div>
+
     </header>
 
-    <section class="cards">
+    <section class="infos">
 
         <div class="card">
             <h3>💨 Vent</h3>
@@ -35,11 +42,11 @@
 
         <div class="card">
             <h3>💧 Humidité</h3>
-            <span id="humidity">--%</span>
+            <span id="humidity">-- %</span>
         </div>
 
         <div class="card">
-            <h3>🌡️ Pression</h3>
+            <h3>🌡 Pression</h3>
             <span id="pressure">----</span>
         </div>
 
@@ -51,8 +58,19 @@
     </section>
 
     <section>
-        <h2>Prévisions</h2>
-        <div id="forecast"></div>
+
+        <h2>Prévisions 24 heures</h2>
+
+        <div id="hourly" class="forecast-row"></div>
+
+    </section>
+
+    <section>
+
+        <h2>Prévisions 7 jours</h2>
+
+        <div id="daily" class="forecast-row"></div>
+
     </section>
 
 </div>
