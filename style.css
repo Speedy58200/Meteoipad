@@ -175,3 +175,26 @@ text-align:center;
 }
 
 }
+.sunny{
+    background:linear-gradient(180deg,#4facfe,#00c6fb);
+}
+
+.clouds{
+    background:linear-gradient(180deg,#7f8fa6,#95afc0);
+}
+
+.rain{
+    background:linear-gradient(180deg,#4b6584,#2d3436);
+}
+
+.storm{
+    background:linear-gradient(180deg,#3c6382,#0a3d62);
+}
+
+.snow{
+    background:linear-gradient(180deg,#dfe6e9,#b2bec3);
+}
+
+.night{
+    background:linear-gradient(180deg,#0c2461,#1e3799);
+}
