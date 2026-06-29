@@ -24,20 +24,15 @@ setInterval(updateClock, 1000);
 async function loadWeather() {
 
     const url =
+
 `https://api.openweathermap.org/data/2.5/weather?lat=${CONFIG.lat}&lon=${CONFIG.lon}&appid=${CONFIG.apiKey}&units=metric&lang=fr`;
 
     try {
 
-        try {
-    const response = await fetch(url);
-    const data = await response.json();
-    alert(JSON.stringify(data));
-} catch (e) {
-    alert("ERREUR : " + e.message);
-}
-
+        const response = await fetch(url);
         const data = await response.json();
-alert(JSON.stringify(data));
+
+        alert(JSON.stringify(data));
 
         if (data.cod && data.cod != 200) {
             alert("Erreur OpenWeather : " + data.message);
@@ -45,6 +40,7 @@ alert(JSON.stringify(data));
         }
 
         document.getElementById("city").textContent = CONFIG.ville;
+
 
         document.getElementById("temp").textContent =
             Math.round(data.main.temp) + "°";
