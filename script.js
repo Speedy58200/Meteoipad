@@ -65,3 +65,5 @@ async function loadWeather() {
 }
 
 loadWeather();
+
+setInterval(loadWeather, 600000);
