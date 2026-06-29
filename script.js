@@ -37,6 +37,35 @@ async function loadWeather() {
 
         const weatherResponse = await fetch(weatherURL);
         const weather = await weatherResponse.json();
+        const condition = weather.weather[0].main.toLowerCase();
+
+document.body.className = "";
+
+switch (condition) {
+    case "clear":
+        document.body.classList.add("sunny");
+        break;
+
+    case "clouds":
+        document.body.classList.add("clouds");
+        break;
+
+    case "rain":
+    case "drizzle":
+        document.body.classList.add("rain");
+        break;
+
+    case "thunderstorm":
+        document.body.classList.add("storm");
+        break;
+
+    case "snow":
+        document.body.classList.add("snow");
+        break;
+
+    default:
+        document.body.classList.add("night");
+}
 
         const forecastResponse = await fetch(forecastURL);
         const forecast = await forecastResponse.json();
